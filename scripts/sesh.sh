@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+echo "Installing sesh..."
 brew install sesh
 
 # Generate completion script

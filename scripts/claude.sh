@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+echo "Installing Claude CLI..."
 # Create the Claude profile directories so the aliases don't fail
 mkdir -p ~/.claude-profiles/work ~/.claude-profiles/personal
 
