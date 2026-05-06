@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+# Create the Claude profile directories so the aliases don't fail
+mkdir -p ~/.claude-profiles/work ~/.claude-profiles/personal
+
+# Install native Claude Code CLI
+curl -fsSL https://claude.ai/install.sh | bash
+
+echo 'alias claudew="HOME=~/.claude-profiles/work claude"' >> ~/.bashrc
+echo 'alias claudep="HOME=~/.claude-profiles/personal claude"' >> ~/.bashrc
