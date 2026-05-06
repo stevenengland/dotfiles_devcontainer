@@ -13,6 +13,7 @@ ln -sf ~/dotfiles/config/.bashrc ~/.bashrc
 #ln -sf "$DOTFILES_DIR/config/.gitconfig" ~/.gitconfig
 
 echo "Installing dependencies..."
-"$DOTFILES_DIR/scripts/brew.sh"
+# Source instead of executing the brew script so that the Homebrew path is available for the rest of the installation
+source "$DOTFILES_DIR/scripts/brew.sh"
 "$DOTFILES_DIR/scripts/sesh.sh"
 "$DOTFILES_DIR/scripts/claude.sh"
