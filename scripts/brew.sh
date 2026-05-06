@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
 
-# !!! Assumes sudoless vscode user in devcontainer, which is the default for devcontainers.
+# Assumes passwordless sudo vscode user (devcontainer default)
 
 echo "Installing Homebrew..."
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
+# Bootstrap brew onto PATH for the rest of this script
 echo >> "$HOME/.bashrc"
-echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"' >> "$HOME/.bashrc"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+BREW_PREFIX=/home/linuxbrew/.linuxbrew
+[ -d /opt/homebrew ] && BREW_PREFIX=/opt/homebrew
+eval "$($BREW_PREFIX/bin/brew shellenv bash)"
 
+echo "Installing packages..."
 brew install gcc
