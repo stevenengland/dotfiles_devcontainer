@@ -8,5 +8,5 @@ mkdir -p ~/.claude-profiles/work ~/.claude-profiles/personal
 # Install native Claude Code CLI
 curl -fsSL https://claude.ai/install.sh | bash
 
-echo "alias claudew='HOME=$HOME/.claude-profiles/work claude'" >> ~/.bashrc
-echo "alias claudep='HOME=$HOME/.claude-profiles/personal claude'" >> ~/.bashrc
+echo "alias claudew='HOME=$HOME/.claude-profiles/work XDG_CONFIG_HOME=$HOME/.config claude'" >> ~/.bashrc
+echo "alias claudep='HOME=$HOME/.claude-profiles/personal XDG_CONFIG_HOME=$HOME/.config claude'" >> ~/.bashrc
