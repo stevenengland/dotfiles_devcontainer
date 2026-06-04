@@ -5,8 +5,9 @@ echo "Installing Claude CLI..."
 # Create the Claude profile directories so the aliases don't fail
 mkdir -p ~/.claude-profiles/work ~/.claude-profiles/personal
 
-ln -s /home/vscode/.local /home/vscode/.claude-profiles/work/.local
-ln -s /home/vscode/.local /home/vscode/.claude-profiles/personal/.local
+# Only create symlinks if they don't already exist
+[ -L /home/vscode/.claude-profiles/work/.local ]     || ln -s /home/vscode/.local ~/.claude-profiles/work/.local
+[ -L /home/vscode/.claude-profiles/personal/.local ] || ln -s /home/vscode/.local ~/.claude-profiles/personal/.local
 
 # Install native Claude Code CLI
 curl -fsSL https://claude.ai/install.sh | bash
