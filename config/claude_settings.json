@@ -1,0 +1,56 @@
+{
+    "permissions": {
+        "allow": [
+            "Bash(mkdir -p *)",
+            "Bash(sed -n *)",
+            "Bash(grep *)",
+            "Bash(rg *)",
+            "Bash(cat *)",
+            "Bash(gh issue view *)",
+            "Bash(gh pr checks *)",
+            "Bash(python ./tools/tests.py *)",
+            "Read(~/.claude-profiles/work/.claude/plugins/**)",
+            "Read(~/.claude/plugins/**)",
+            "Write(//tmp/**)"
+        ]
+    },
+    "model": "opus",
+    "hooks": {
+        "SessionStart": [
+            {
+                "hooks": [
+                    {
+                        "type": "command",
+                        "command": "\"/home/vscode/.claude/hooks/context-mode-cache-heal.mjs\""
+                    }
+                ]
+            }
+        ]
+    },
+    "statusLine": {
+        "type": "command",
+        "command": "bash /home/vscode/.claude/statusline-command.sh"
+    },
+    "enabledPlugins": {
+        "pyright-lsp@claude-plugins-official": true,
+        "stenswf@sten-agent-skills": true,
+        "context-mode@context-mode": true
+    },
+    "extraKnownMarketplaces": {
+        "sten-agent-skills": {
+            "source": {
+                "source": "github",
+                "repo": "stevenengland/sten-agent-skills"
+            },
+            "autoUpdate": true
+        },
+        "context-mode": {
+            "source": {
+                "source": "github",
+                "repo": "mksglu/context-mode"
+            }
+        }
+    },
+    "effortLevel": "high",
+    "theme": "dark"
+}
