@@ -5,4 +5,4 @@ echo "Installing rtk..."
 
 brew install rtk
 
-rtk init -g --auto-patch
+RTK_TELEMETRY_DISABLED=1 rtk init -g --auto-patch
