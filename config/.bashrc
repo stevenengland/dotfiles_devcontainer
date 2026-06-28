@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+# [EARLY:START]
+# [EARLY:END]
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -155,3 +158,9 @@ if [[ "$TERM" == "xterm" ]]; then
     # Append to PROMPT_COMMAND to call precmd before displaying the prompt
     PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }precmd"
 fi
+
+# [INIT:START]
+# [INIT:END]
+
+# [LATE:START]
+# [LATE:END]

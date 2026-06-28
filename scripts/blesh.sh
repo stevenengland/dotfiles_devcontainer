@@ -9,6 +9,9 @@ BLESH_URL="https://github.com/akinomyoga/ble.sh/releases/download/v${BLESH_VERSI
 BLESH_INSTALL_DIR="${HOME}/.local/share/blesh"
 BLESH_ENTRY="${BLESH_INSTALL_DIR}/ble.sh"
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/lib/bashrc.sh"
+
 # ── Idempotency check ────────────────────────────────────────────────────────
 if [[ -f "${BLESH_ENTRY}" ]]; then
     echo "[blesh] Already installed at ${BLESH_ENTRY}, skipping."
@@ -37,14 +40,8 @@ echo "[blesh] Installing to ${BLESH_INSTALL_DIR}..."
 mkdir -p "${BLESH_INSTALL_DIR}"
 cp -r "${TMPDIR}/ble-${BLESH_VERSION}/." "${BLESH_INSTALL_DIR}/"
 
-echo "[blesh] Done."
-echo ""
-echo "Add the following to your .bashrc:"
-echo ""
-echo "  # TOP of .bashrc (interactive shells only)"
-echo "  [[ \$- == *i* ]] && source -- \"\${HOME}/.local/share/blesh/ble.sh\" --attach=none"
-echo ""
-echo "  # ... your other config (tv init, atuin init, etc.) ..."
-echo ""
-echo "  # BOTTOM of .bashrc"
-echo "  [[ \${BLE_VERSION-} ]] && ble-attach"
+# ── Wire ble.sh into .bashrc ─────────────────────────────────────────────────
+bashrc_insert EARLY '[[ $- == *i* && -r "${HOME}/.local/share/blesh/ble.sh" ]] && source -- "${HOME}/.local/share/blesh/ble.sh" --attach=none'
+bashrc_insert LATE  '[[ ${BLE_VERSION-} ]] && ble-attach'
+
+echo "[blesh] Done — wired ble.sh into ~/.bashrc."

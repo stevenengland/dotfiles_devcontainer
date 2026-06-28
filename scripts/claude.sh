@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/lib/bashrc.sh"
+
 echo "Installing Claude CLI..."
 # Create the Claude profile directories so the aliases don't fail
 mkdir -p ~/.claude-profiles/work ~/.claude-profiles/personal
@@ -27,5 +30,5 @@ if [ ! -f "$CLAUDE_CONFIG" ] && [ -d "$CLAUDE_BACKUP_DIR" ]; then
   fi
 fi
 
-echo "alias claudew='HOME=$HOME/.claude-profiles/work XDG_CONFIG_HOME=$HOME/.config claude'" >> ~/.bashrc
-echo "alias claudep='HOME=$HOME/.claude-profiles/personal XDG_CONFIG_HOME=$HOME/.config claude'" >> ~/.bashrc
+bashrc_insert INIT "alias claudew='HOME=\$HOME/.claude-profiles/work XDG_CONFIG_HOME=\$HOME/.config claude'"
+bashrc_insert INIT "alias claudep='HOME=\$HOME/.claude-profiles/personal XDG_CONFIG_HOME=\$HOME/.config claude'"
